@@ -22,7 +22,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.AppFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.CategoryFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.GameFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.HomeFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.SubjectFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.TopFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.tools.UiUtils;
 
 public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
@@ -30,6 +35,12 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
     private ActionBarDrawerToggle drawerToggle;
     private ViewPager mViewPager;
     private PagerTabStrip pager_tab_strip;
+    private String[] tab_names; //标签的名称
+
+    @Override
+    protected void init() {
+        tab_names = UiUtils.getStringArray(R.array.tab_names);
+    }
 
     @Override
     protected void initView() {
@@ -82,20 +93,32 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         public Fragment getItem(int position) {
             if (position == 0) {
                 return new HomeFragment();
-            } else {
+            } else if(position == 1){
                 return new AppFragment();
+            } else if(position == 2){
+                return new GameFragment();
+            } else if(position == 3){
+                return new SubjectFragment();
+            } else if(position == 4){
+                return new CategoryFragment();
+            } else if(position == 5){
+                return new TopFragment();
+            } else{
+                return null;
             }
         }
 
         //一共有几个条目
         @Override
         public int getCount() {
-            return 4;
+
+            return tab_names.length;
         }
         //获取标签名
         @Override
         public CharSequence getPageTitle(int position) {
-            return "标签"+position;
+
+            return tab_names[position];
         }
     }
 
