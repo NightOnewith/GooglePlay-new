@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
@@ -23,7 +24,7 @@ import android.widget.Toast;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.AppFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.HomeFragment;
 
-public class MainActivity extends AppCompatActivity implements OnQueryTextListener {
+public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -31,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
     private PagerTabStrip pager_tab_strip;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_main);
 
         mdrawerLayout = (DrawerLayout) findViewById(R.id.dl);
@@ -43,7 +43,10 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         pager_tab_strip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
         //设置标签下划线颜色
         pager_tab_strip.setTabIndicatorColor(getResources().getColor(R.color.indicatorcolor));
+    }
 
+    @Override
+    protected void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
@@ -66,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         //让开关和actionbar建立关系
         mdrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
     }
 
     private class MainAdapter extends FragmentStatePagerAdapter {
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         public int getCount() {
             return 4;
         }
-
+        //获取标签名
         @Override
         public CharSequence getPageTitle(int position) {
             return "标签"+position;
