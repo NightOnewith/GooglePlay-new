@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.AppFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.CategoryFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.FragmentFactory;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.GameFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.HomeFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.SubjectFragment;
@@ -91,21 +92,8 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         //每个条目返回的Fragment
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return new HomeFragment();
-            } else if(position == 1){
-                return new AppFragment();
-            } else if(position == 2){
-                return new GameFragment();
-            } else if(position == 3){
-                return new SubjectFragment();
-            } else if(position == 4){
-                return new CategoryFragment();
-            } else if(position == 5){
-                return new TopFragment();
-            } else{
-                return null;
-            }
+            //通过工厂生产Fragment
+            return FragmentFactory.createFragment(position);
         }
 
         //一共有几个条目

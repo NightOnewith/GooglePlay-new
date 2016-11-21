@@ -12,7 +12,7 @@ import java.util.List;
 public class BaseActivity extends ActionBarActivity {
 
     //管理运行的所有App
-    List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
+    public final static List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
