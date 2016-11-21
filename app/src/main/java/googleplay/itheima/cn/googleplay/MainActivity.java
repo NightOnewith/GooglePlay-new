@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
     private DrawerLayout mdrawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ViewPager mViewPager;
+    private PagerTabStrip pager_tab_strip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +36,18 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         setContentView(R.layout.activity_main);
 
         mdrawerLayout = (DrawerLayout) findViewById(R.id.dl);
+
         mViewPager = (ViewPager) findViewById(R.id.vp);
         mViewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
+
+        pager_tab_strip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
+        //设置标签下划线颜色
+        pager_tab_strip.setTabIndicatorColor(getResources().getColor(R.color.indicatorcolor));
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer_am);
-
-
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.Tab tab1 = actionBar.newTab().setText("标签一").setTabListener(new MyTabListener());
-        actionBar.addTab(tab1);
-        ActionBar.Tab tab2 = actionBar.newTab().setText("标签二").setTabListener(new MyTabListener());
-        actionBar.addTab(tab2);
-        ActionBar.Tab tab3 = actionBar.newTab().setText("标签三").setTabListener(new MyTabListener());
-        actionBar.addTab(tab3);
-        ActionBar.Tab tab4 = actionBar.newTab().setText("标签四").setTabListener(new MyTabListener());
-        actionBar.addTab(tab4);
 
         //参数1：当前actionbar所在activity，参数2：控制哪个抽屉，参数3;按钮的图片，参数4：抽屉打开的描述，参数5：抽屉关闭的描述
         drawerToggle = new ActionBarDrawerToggle(this, mdrawerLayout, R.drawable.ic_drawer_am, R.string.open_drawer, R.string.close_drawer) {
@@ -70,32 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         //让开关和actionbar建立关系
         mdrawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-        //当页面发生变化时调用(切换页面时tab标签也切换到相应位置)
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                getSupportActionBar().setSelectedNavigationItem(position);
-            }
-        });
-    }
 
-    private class MyTabListener implements ActionBar.TabListener {
-        //当tab标签被选中时Viewpage切换到指定位置
-        @Override
-        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-            mViewPager.setCurrentItem(tab.getPosition());
-        }
-
-        @Override
-        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-        }
-
-        @Override
-        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-        }
     }
 
     private class MainAdapter extends FragmentStatePagerAdapter {
@@ -103,25 +74,27 @@ public class MainActivity extends AppCompatActivity implements OnQueryTextListen
         public MainAdapter(FragmentManager fm) {
             super(fm);
         }
+
         //每个条目返回的Fragment
         @Override
         public Fragment getItem(int position) {
-            if(position==0){
+            if (position == 0) {
                 return new HomeFragment();
             } else {
                 return new AppFragment();
             }
         }
+
         //一共有几个条目
         @Override
         public int getCount() {
             return 4;
         }
-    }
 
-    public void onclick(View v) {
-        Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-        startActivity(intent);
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return "标签"+position;
+        }
     }
 
     @Override

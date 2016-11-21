@@ -10,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_tab_strip"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout"
-            android:layout_centerHorizontal="true"
-            android:onClick="onclick"
-            android:text="Button" />
+            android:layout_gravity="top"
+            android:background="#ffffff"
+            android:textColor="#000"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp" />
     </android.support.v4.view.ViewPager>
 
     <FrameLayout
