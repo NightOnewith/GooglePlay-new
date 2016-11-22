@@ -28,6 +28,7 @@ import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragmen
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.HomeFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.SubjectFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.TopFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.tools.LogUtils;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.tools.UiUtils;
 
 public class MainActivity extends BaseActivity implements OnQueryTextListener {

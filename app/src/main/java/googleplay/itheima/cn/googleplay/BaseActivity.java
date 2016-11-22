@@ -1,10 +1,15 @@
 package googleplay.itheima.cn.googleplay;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Filter;
 
 /**
  * Created by yin on 2016/11/21.
@@ -13,9 +18,22 @@ public class BaseActivity extends ActionBarActivity {
 
     //管理运行的所有App
     public final static List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
+
+    private KillReceiver receiver;
+    private class KillReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            finish();
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        receiver = new KillReceiver();
+        IntentFilter filter = new IntentFilter("com.itheima.google.killall");
+        registerReceiver(receiver, filter);
+
         //同步
         synchronized (mActivities){
             mActivities.add(this);
