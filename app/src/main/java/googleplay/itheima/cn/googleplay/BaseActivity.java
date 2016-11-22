@@ -19,20 +19,21 @@ public class BaseActivity extends ActionBarActivity {
     //管理运行的所有App
     public final static List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
 
-    private KillReceiver receiver;
-    private class KillReceiver extends BroadcastReceiver{
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            finish();
-        }
-    }
+//    注册广播接收器
+//    private KillReceiver receiver;
+//    private class KillReceiver extends BroadcastReceiver{
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            finish();
+//        }
+//    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        receiver = new KillReceiver();
-        IntentFilter filter = new IntentFilter("com.itheima.google.killall");
-        registerReceiver(receiver, filter);
+//        receiver = new KillReceiver();
+//        IntentFilter filter = new IntentFilter("com.itheima.google.killall");
+//        registerReceiver(receiver, filter);
 
         //同步
         synchronized (mActivities){
@@ -51,6 +52,11 @@ public class BaseActivity extends ActionBarActivity {
         synchronized (mActivities){
             mActivities.remove(this);
         }
+//        //注销广播监听
+//        if (receiver != null){
+//            unregisterReceiver(receiver);
+//            receiver = null;
+//        }
 
     }
 

@@ -5,6 +5,7 @@
     <string name="detail_title">应用详情</string>
     <string name="open_drawer">抽屉打开了</string>
     <string name="close_drawer">抽屉关闭了</string>
+    <string name="load_error">加载失败，点击重试</string>
     <string-array name="tab_names">
         <item>首页</item>
         <item>应用</item>
