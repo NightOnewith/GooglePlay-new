@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
         //每个条目返回的Fragment
         @Override
         public Fragment getItem(int position) {
-            //通过FragmentFactory工厂生产Fragment
+            //通过FragmentFactory(工厂)生产Fragment
             return FragmentFactory.createFragment(position);
         }
 
