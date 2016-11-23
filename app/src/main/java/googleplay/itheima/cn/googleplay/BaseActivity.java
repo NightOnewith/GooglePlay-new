@@ -16,7 +16,7 @@ import java.util.logging.Filter;
  */
 public class BaseActivity extends ActionBarActivity {
 
-    //管理运行的所有app
+    //管理运行的所有App
     public final static List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
 
 //    注册广播接收器
