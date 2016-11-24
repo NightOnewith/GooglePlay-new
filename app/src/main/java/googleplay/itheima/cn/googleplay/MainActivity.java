@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.AppFragment;
+import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.BaseFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.CategoryFragment;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.FragmentFactory;
 import googleplay.itheima.cn.googleplay.googleplay.itheima.cn.googleplay.Fragment.GameFragment;
@@ -52,6 +53,14 @@ public class MainActivity extends BaseActivity implements OnQueryTextListener {
 
         mViewPager = (ViewPager) findViewById(R.id.vp);
         mViewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                BaseFragment createFragment = (BaseFragment) FragmentFactory.createFragment(position);
+                createFragment.show();
+            }
+        });
 
         pager_tab_strip = (PagerTabStrip) findViewById(R.id.pager_tab_strip);
         //设置标签下划线颜色

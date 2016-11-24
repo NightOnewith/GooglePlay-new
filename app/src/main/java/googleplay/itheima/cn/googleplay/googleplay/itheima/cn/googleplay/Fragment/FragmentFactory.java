@@ -9,10 +9,10 @@ import java.util.Map;
  * Created by yin on 2016/11/21.
  */
 public class FragmentFactory {
-    private static Map<Integer, Fragment> mFragmets = new HashMap<Integer, Fragment>();
+    private static Map<Integer, BaseFragment> mFragmets = new HashMap<Integer, BaseFragment>();
 
     public static Fragment createFragment(int position){
-        Fragment fragment = null;
+        BaseFragment fragment = null;
         fragment = mFragmets.get(position); //从集合中取出来Fragment
         if(fragment == null){ //如果集合中没有取出来，需要重新创建
             if (position == 0) {
